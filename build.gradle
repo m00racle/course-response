@@ -2,6 +2,9 @@ plugins {
     id 'java'
     id "org.springframework.boot" version "1.5.10.RELEASE"
 }
+/*
+* The plugins above is set at that since this is the new way of installing plugins in Gradle 2.1 and so on
+* */
 
 group 'com.mooracle'
 version '1.0-SNAPSHOT'
@@ -13,8 +16,16 @@ repositories {
 }
 
 dependencies {
+    /*
+    We want to use REST Spring data project thus we need to add dependency:
+    * */
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version: '1.5.10.RELEASE'
+
+    // we also want to use database so we need to make sure spring can use it :
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.10.RELEASE'
+
+    // Next we need to add Database engine to use with the JPA: (we choose H2 database)
+    compile 'com.h2database:h2'
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
