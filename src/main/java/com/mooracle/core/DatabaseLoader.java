@@ -62,7 +62,8 @@ public class DatabaseLoader implements ApplicationRunner {
                 "Java 9",
                 "Scala",
                 "Groovy",
-                "Hibernate"
+                "Hibernate",
+                "Spring HATEOAS" /* <- this is added later to differentiate the modulo between templates and subjects*/
         };
 
         List<Course> bunchOfCourses = new ArrayList<>(); /* set the platform for multiple course first*/
