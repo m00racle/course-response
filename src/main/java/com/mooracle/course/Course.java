@@ -1,11 +1,11 @@
 package com.mooracle.course;
 
 import com.mooracle.core.BaseEntity;
+import com.mooracle.review.Review;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity // this a model of an Object hence an Entity in JPA
 public class Course extends BaseEntity {
@@ -13,6 +13,13 @@ public class Course extends BaseEntity {
 
     private String title;
     private String url;
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<Review> reviews;/*<- this will make relationship with one course to many Reviews but we need to set
+    also the "course" side in the com.mooracle.review.Review to have many to one relation
+    Note that we use list to make it many reviews to one course
+
+    As for the cascade it will make if the course gets deleted the reviews inside also deleted!*/
 
     /*
     * The JPA requires a constructors that takes no parameter
@@ -28,6 +35,10 @@ public class Course extends BaseEntity {
          keyword
          NOTE: super class and parent class are interchangably used
          */
+
+        reviews = new ArrayList<>(); /*<- this is where the added initialization is in action since we need this List
+        of review initialized which is not available in the Review class. Then it will establish the relationship with
+        the Review class*/
     }
 
     /*
@@ -47,6 +58,23 @@ public class Course extends BaseEntity {
     /*
     * Build Getter and Setters
     * */
+
+    public List<Review> getReviews() {
+        /*We only make getters for the review since we do not want users can set all the reviews because it will be bad
+        * if users can just change all available reviews
+        *
+        * We need to add new public method that only allow users to add not to modify the reviews outside users review
+        * */
+        return reviews;
+    }
+
+    public void addReview(Review review){
+        review.setCourse(this);/*<- this is important to set the relationship of this reveiew to this course.
+        I forgot once and it fails to emerge on the database*/
+
+        reviews.add(review); /*<- this will only add review (new review) to the existing List of reviews
+        if no review ever added it will only initialized empty reviews list*/
+    }
 
     public String getTitle() {
         return title;
