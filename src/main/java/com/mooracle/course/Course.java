@@ -4,14 +4,19 @@ import com.mooracle.core.BaseEntity;
 import com.mooracle.review.Review;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity // this a model of an Object hence an Entity in JPA
 public class Course extends BaseEntity {
 
-
+    @NotNull /*<- this is validation annotation of the entity must have non null title if want to process*/
+    @Size(min = 2, max=140) /*<- this validator is to fix the bug of creating a course using empty string as course
+    title and also to prevent over capacitate the course title field*/
     private String title;
+
     private String url;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
