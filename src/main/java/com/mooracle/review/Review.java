@@ -2,6 +2,7 @@ package com.mooracle.review;
 
 import com.mooracle.core.BaseEntity;
 import com.mooracle.course.Course;
+import com.mooracle.user.User;
 
 import javax.persistence.*;
 
@@ -14,6 +15,9 @@ public class Review extends BaseEntity {
     @ManyToOne /*<- no need to specify for this since it will have course as part of this just make sure we build
     getters and setters for this Course object called course*/
     private Course course;
+
+    @ManyToOne/*<- remember one user can have many reviews as he/she like*/
+    private User reviewer;
 
     protected Review() {
         super();/* <- instead using full base constructor we now can just call super() to have the same constructor as
@@ -39,7 +43,18 @@ public class Review extends BaseEntity {
         * parameter of the review*/
     }
 
-    /*we build getters and setters for course*/
+    /*we build getters and setters for course
+    *
+    * Also I add getters and setters for User reviewer*/
+
+    public User getReviewer() {
+        return reviewer;
+    }
+
+    public void setReviewer(User reviewer) {
+        this.reviewer = reviewer;
+    }
+
     public Course getCourse() {
         return course;
     }

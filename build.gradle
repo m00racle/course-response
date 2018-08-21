@@ -30,5 +30,8 @@ dependencies {
     // Next we need to add Database engine to use with the JPA: (we choose H2 database)
     compile 'com.h2database:h2'
 
+    //we need to add spring boot security to authenticate users
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.5.10.RELEASE'
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
