@@ -15,7 +15,7 @@ import javax.persistence.Entity;
 
 @Entity /*<- this will become an entity which create many user object*/
 public class User extends BaseEntity {
-    private String userName;
+    private String username;
     private String firstName;
     private String lastName;
     @JsonIgnore /*<- this will ensure it will not be imported into Json data to be shown but it still not enough*/
@@ -36,11 +36,11 @@ public class User extends BaseEntity {
     /*we make the constructor then but note that the password field constructor will call the setPassword method
     * and passed the String password argument*/
 
-    public User(String userName, String firstName, String lastName, String password, String[] roles) {
+    public User(String username, String firstName, String lastName, String password, String[] roles) {
         this();/*<- same with other @Entity it needs to call the default constructor thus this() is calling User()*/
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userName = userName;
+        this.username = username;
         setPassword(password);/*<- this to ensure that password will always be encrypted*/
         this.roles = roles;
     }
@@ -67,12 +67,12 @@ public class User extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
